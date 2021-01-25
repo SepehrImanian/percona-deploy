@@ -8,8 +8,8 @@ services:
       - db_data:/var/lib/mysql
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD=root
-      CLUSTER_NAME=cluster1
+      - MYSQL_ROOT_PASSWORD=root
+      - CLUSTER_NAME=cluster1
     networks:
      - pxc-network
 
@@ -21,9 +21,9 @@ services:
       - db_data:/var/lib/mysql
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD=root
-      CLUSTER_NAME=cluster1
-      CLUSTER_JOIN=node1
+      - MYSQL_ROOT_PASSWORD=root
+      - CLUSTER_NAME=cluster1
+      - CLUSTER_JOIN=node1
     networks:
      - pxc-network
 
@@ -36,9 +36,9 @@ services:
       - db_data:/var/lib/mysql
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD=root
-      CLUSTER_NAME=cluster1
-      CLUSTER_JOIN=node1
+      - MYSQL_ROOT_PASSWORD=root
+      - CLUSTER_NAME=cluster1
+      - CLUSTER_JOIN=node1
     networks:
      - pxc-network
 
