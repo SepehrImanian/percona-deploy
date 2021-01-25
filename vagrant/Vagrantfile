@@ -1,0 +1,23 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+ENV['VAGRANT_NO_PARALLEL'] = 'yes'
+
+Vagrant.configure(2) do |config|
+
+  NodeCount = 3
+
+  (1..NodeCount).each do |i|
+    config.vm.define "percona0#{i}" do |node|
+      node.vm.box = "generic/ubuntu1804"
+      node.vm.hostname = "percona0#{i}"
+      node.vm.network "private_network", ip: "172.42.43.10#{i}"
+      node.vm.provider "virtualbox" do |v|
+        v.name = "percona0#{i}"
+        v.memory = 2048
+        v.cpus = 2
+      end
+    end
+  end
+
+end
