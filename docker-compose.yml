@@ -1,0 +1,49 @@
+version: '3.3'
+
+services:
+
+  node1:
+    image: percona/percona-xtradb-cluster:latest
+    volumes: 
+      - db_data:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD=root
+      CLUSTER_NAME=cluster1
+    networks:
+     - pxc-network
+
+  node2:
+    image: percona/percona-xtradb-cluster:latest
+    depends_on:
+      - node1
+    volumes: 
+      - db_data:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD=root
+      CLUSTER_NAME=cluster1
+      CLUSTER_JOIN=node1
+    networks:
+     - pxc-network
+
+  node3:
+    image: percona/percona-xtradb-cluster:latest
+    depends_on:
+      - node1
+      - node2
+    volumes: 
+      - db_data:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD=root
+      CLUSTER_NAME=cluster1
+      CLUSTER_JOIN=node1
+    networks:
+     - pxc-network
+
+networks:
+  pxc-network:
+
+volumes:
+  db_data:
